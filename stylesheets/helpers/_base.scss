@@ -1,0 +1,43 @@
+.boxPaddingTop{
+    margin-top: 120px;
+    margin-bottom: 100px;
+}
+.cardBox{
+    padding-top: 60px;
+    box-shadow: 0px 3px 6px #00000029;
+};
+
+.cardSize{
+    width: 350px;
+}
+.descriptBox{
+    height: 111px;
+}
+
+.cardTitle{
+    display: block;
+    a{
+        text-decoration:none;
+    };
+    a:hover{
+        color: #64C3BF;
+    }
+
+};
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+.areaTag  {
+    top:-13px;
+    left: 0px;
+}
+.areaStarts{
+    bottom:-16px;
+};
+
+

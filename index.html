@@ -5,9 +5,141 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>購票首頁</title>
-    <link rel="stylesheet" href="./css/all.css">
+    <link rel="stylesheet" href="css/all.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
 </head>
+
 <body>
-    <a href="#" class="btn btn-primary">我是按鈕</a>
+    <section>
+      <div class="container-lg boxPaddingTop  px-5">
+      <div class="row mb-5 bg-body rounded cardBox">
+        <div class="col-6 d-flex justify-content-center">
+          <div class=" cardSize">
+            <h2><img src="img/Lets_Travel_700x470.png" class="img-fluid" alt="首頁圖片"></h2>
+            <h3><img src="img/undraw_Traveling_re_weve_700X500.png" class="img-fluid"  alt="文字圖片"></h3>
+          </div>
+        </div>
+        <div class="col-6 cardSize p-0">
+          <h1 class="text-primary fs-4 d-flex align-items-center border-primary border-bottom border-3 pb-1">
+            <span class="material-symbols-outlined pe-1">
+              add_circle
+            </span>
+            新增旅遊套票
+          </h1>
+          <ul class="list list-unstyled ">
+            <li class="pt-4">
+              <div class="col-auto d-flex justify-content-between">
+                <label for="inputName" class="col-form-label fs-6 text-primary">套票名稱</label>
+                <input type="text" id="inputName" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top" aria-describedby="passwordHelpInline" placeholder="請填寫套票名稱" name="套票名稱">
+              </div>
+            </li>
+            <li class="pt-4">
+              <div class="col-auto d-flex justify-content-between">
+                <label for="inputImgUrl" class="col-form-label fs-6 text-primary">圖片網址</label>
+                <input type="text" id="inputImgUrl" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top" aria-describedby="imgUrlHelpInline" placeholder="請填寫圖片網址" name="圖片網址">
+              </div>
+            </li>
+            <li class="pt-4">
+              <div class="col-auto d-flex justify-content-between">
+                <label for="inputLocation" class="col-form-label fs-6 text-primary">景點地區</label>
+                  <select name="景點地區" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark">
+                    <option id="inputLocation" aria-describedby="locationHelpInline" value="" >請選擇景點地區</option>
+                    <option value="台北">台北</option>
+                    <option value="台中">台中</option>
+                    <option value="高雄">高雄</option>
+                  </select>
+              </div>
+            </li>
+            <li class="pt-4">
+              <div class="col-auto d-flex justify-content-between">
+                <label for="priceForSet" class="col-form-label fs-6 text-primary">套票金額</label>
+                <input type="number" id="priceForSet" name="套票金額" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark" placeholder="請填寫套票金額" min="0"> 
+              </div>
+            </li>
+            <li class="pt-4">
+              <div class="col-auto d-flex justify-content-between">
+                <label for="numberForSet" class="col-form-label fs-6 text-primary">套票組數</label>
+                <input type="number" id="numberForSet" name="套票組數" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark" placeholder="請填寫套票組數" min="1"> 
+              </div>
+            </li>
+            <li class="pt-4">
+              <div class="col-auto d-flex justify-content-between">
+                <label for="numberForSet" class="col-form-label fs-6 text-primary">套票星級</label>
+                <input type="number" id="numberForSet" name="套票星級" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark" placeholder="請填寫套票星級" min="1" max="10"> 
+              </div>
+            </li>
+            <li class="pt-4">
+              <div class="col-auto d-flex justify-content-between">
+                <label for="descriptForSet" class="col-form-label fs-6 text-primary">套票描述</label>
+                <textarea id="descriptForSet" placeholder="請填寫套票描述（限 100 字）" name="套票描述" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top descriptBox"></textarea>
+              </div>
+            </li>
+            <li class="pt-4 pb-6 position-relative">
+              <button type="button" class="btn btn-primary fs-5 px-4 py-1 position-absolute top-20 end-0">新增套票</button>
+            </li>
+          </ul>
+          
+        </div>
+      </div>
+      </div>
+      
+    </section>
+
+    <section class="body-gr pt-5">
+
+      <div class="container  px-5 srarchArea pb-5">
+        <select name="搜尋欄" id="searchBar" class="col-form-label w-25 text-graymedia border-grayline rounded">
+          <option value="地區搜尋">地區搜尋</option>
+          <option value="台北">台北</option>
+          <option value="台中">台中</option>
+          <option value="高雄">高雄</option>
+        </select>
+        <span class="searchTotalNum ps-4 text-graymedia">本次搜尋共 6 筆資料</span>
+      </div>
+
+      <div class="container">
+        <div class="ticketShow">
+          <ul class="list list-unstyled row cardListArea">
+            
+<!--        <li class="tickCard col-4" >
+              <div class="card">
+                <div class="position-relative">
+                  <div class="bg-softblue text-light fs-5 position-absolute rounded-end px-3 py-2 areaTag">台北</div>
+                  <div class="bg-softblue text-light position-absolute rounded-end px-3 py-2 areaStarts">10</div>
+                  <img src="../assets/images/set01.png" alt="綠島自由行套裝行程" class="card-img-top cardImgUrl">
+                </div>
+                <div class="card-body pt-4">
+                  <h3 class="hs-5 text-primary mb-0 cardTitle border-bottom border-2 border-primary lh-base">
+                    <a href="#">綠島自由行套裝行程</a>
+                  </h3>
+                  <p class="card-text text-graymedia pt-3 lh-base">
+                    嚴選超高CP值綠島自由行套裝行程，多種綠島套裝組合，提供台東綠島來回船票、綠島環島機車、綠島民宿住宿，行程加贈『綠島浮潛體驗』以及『綠島生態導覽』，讓你用輕鬆的綠島套裝自由行，也能深度認識綠島在地文化。
+                  </p>
+                  <p class="ticketNumber d-flex justify-content-between text-primary mb-0">
+                    <span class="d-flex align-items-center fs-6">
+                      <span class="material-symbols-outlined text-primary">
+                        error
+                      </span>
+                      剩下最後 8 組
+                    </span>
+                    <span class="d-flex align-items-center">
+                      <span class="pe-1">TWD</span>
+                      <span class="priceStyle fs-2">$1,280</span>
+                    </span>
+                  </p>
+                </div>
+              </div>
+            </li> -->
+
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    
+    <script src="docJs/main.js"></script>
 </body>
+
 </html>

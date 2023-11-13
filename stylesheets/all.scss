@@ -1,0 +1,11 @@
+//自定義bs時一定要載入的，不然會出錯。
+@import "../node_modules/bootstrap/scss/functions";
+
+//客製化bts部分
+@import "../stylesheets/helpers/variables";
+
+//載入全部的 bs 檔案
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+@import "../stylesheets/helpers/base";
+
