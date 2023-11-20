@@ -5,13 +5,21 @@ let list = document.querySelector('.cardListArea');
 let data=[];
 let str="";
 
-axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
-  .then(function (response) {
-    data=response.data;
-    //console.log(data.data);
-    render();
-    //console.log(response.data);
-  });
+function init(){
+  axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
+    .then(function (response) {
+      data=response.data;
+      //console.log(data);
+      renderC3();
+      render();
+      
+      //console.log(response.data);
+    })
+    .catch(function(err){
+      console.log(err);
+    })
+}
+
 
   function render(){
       //console.log(data.data);
@@ -60,6 +68,49 @@ axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelAp
       list.innerHTML=str;
       //console.log('hello world');
   };
+
+  function renderC3(){
+    let areaObj = {};
+    //console.log(data);
+    let newAreadata = data.data;//取 data裡面的 data值
+    //console.log(newAreadata);
+    newAreadata.forEach(function(item,index){
+      if(areaObj[item.area]==undefined){
+        areaObj[item.area] = 1;
+      }else{
+        areaObj[item.area] +=1;
+      }
+    })
+    //console.log(areaObj); areaObj是物件，需要轉換成陣列
+
+    //轉換資料型態
+    let newData = [];
+    let area = Object.keys(areaObj); //取area的名稱
+    //console.log(area);
+    area.forEach(function(item){
+      let ary =[];
+      ary.push(item);
+      ary.push(areaObj[item]);
+      //console.log(areaObj);
+      newData.push(ary);
+    });
+
+    //生成圓餅圖
+    let chart = c3.generate({
+      bindto: "#chart",
+      data: {
+        columns: newData,
+        type : 'donut',
+      },
+      donut: {
+        title: "套票地區比重"
+      }
+    });
+  }
+
+  init();
+
+
 
 
 //console.log(data);
