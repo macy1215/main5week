@@ -31,22 +31,25 @@
             新增旅遊套票
           </h1>
           <ul class="list list-unstyled ">
+
             <li class="pt-4">
               <div class="col-auto d-flex justify-content-between">
                 <label for="inputName" class="col-form-label fs-6 text-primary">套票名稱</label>
-                <input type="text" id="inputName" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top" aria-describedby="passwordHelpInline" placeholder="請填寫套票名稱" name="套票名稱">
+                <input type="text" id="inputName" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top inputName" aria-describedby="passwordHelpInline" placeholder="請填寫套票名稱" name="套票名稱" >
               </div>
             </li>
+
             <li class="pt-4">
               <div class="col-auto d-flex justify-content-between">
                 <label for="inputImgUrl" class="col-form-label fs-6 text-primary">圖片網址</label>
-                <input type="text" id="inputImgUrl" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top" aria-describedby="imgUrlHelpInline" placeholder="請填寫圖片網址" name="圖片網址">
+                <input type="text" id="inputImgUrl" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top inputImgUrl" aria-describedby="imgUrlHelpInline" placeholder="請填寫圖片網址" name="圖片網址">
               </div>
             </li>
+
             <li class="pt-4">
               <div class="col-auto d-flex justify-content-between">
                 <label for="inputLocation" class="col-form-label fs-6 text-primary">景點地區</label>
-                  <select name="景點地區" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark">
+                  <select name="景點地區" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark inputLocation">
                     <option id="inputLocation" aria-describedby="locationHelpInline" value="" >請選擇景點地區</option>
                     <option value="台北">台北</option>
                     <option value="台中">台中</option>
@@ -54,32 +57,38 @@
                   </select>
               </div>
             </li>
+
             <li class="pt-4">
               <div class="col-auto d-flex justify-content-between">
                 <label for="priceForSet" class="col-form-label fs-6 text-primary">套票金額</label>
-                <input type="number" id="priceForSet" name="套票金額" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark" placeholder="請填寫套票金額" min="0"> 
+                <input type="number" id="priceForSet" name="套票金額" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark priceForSet" placeholder="請填寫套票金額" min="0"> 
               </div>
             </li>
+
             <li class="pt-4">
               <div class="col-auto d-flex justify-content-between">
                 <label for="numberForSet" class="col-form-label fs-6 text-primary">套票組數</label>
-                <input type="number" id="numberForSet" name="套票組數" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark" placeholder="請填寫套票組數" min="1"> 
+                <input type="number" id="numberForSet" name="套票組數" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark numberForSet" placeholder="請填寫套票組數" min="1"> 
               </div>
             </li>
+
             <li class="pt-4">
               <div class="col-auto d-flex justify-content-between">
                 <label for="numberForSet" class="col-form-label fs-6 text-primary">套票星級</label>
-                <input type="number" id="numberForSet" name="套票星級" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark" placeholder="請填寫套票星級" min="1" max="10"> 
+                <input type="number" id="startForSet" name="套票星級" class="w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top text-dark startForSet" placeholder="請填寫套票星級" min="1" max="10"> 
               </div>
             </li>
+
             <li class="pt-4">
               <div class="col-auto d-flex justify-content-between">
                 <label for="descriptForSet" class="col-form-label fs-6 text-primary">套票描述</label>
-                <textarea id="descriptForSet" placeholder="請填寫套票描述（限 100 字）" name="套票描述" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top descriptBox"></textarea>
+                <textarea id="descriptForSet" placeholder="請填寫套票描述（限 100 字）" name="套票描述" class=" w-75 border-0 bg-gray border-primary border-bottom px-2 rounded-top descriptBox descriptForSet"></textarea>
               </div>
             </li>
+            
             <li class="pt-4 pb-6 position-relative">
-              <button type="button" class="btn btn-primary fs-5 px-4 py-1 position-absolute top-20 end-0">新增套票</button>
+              <button type="button" class="btn btn-primary fs-5 px-4 py-1 position-absolute top-20 end-0 btnAdd">新增套票
+              </button>
             </li>
           </ul>
           
@@ -100,7 +109,7 @@
                 <option value="台中">台中</option>
                 <option value="高雄">高雄</option>
                 </select>
-                <span class="searchTotalNum ps-4 text-graymedia">本次搜尋共 6 筆資料</span>
+                <span class="searchTotalNum ps-4 text-graymedia seacherNum"></span>
             </div>
             <div class="col-4">
                 <div id="chart"></div>

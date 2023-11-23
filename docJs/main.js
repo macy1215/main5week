@@ -2,8 +2,11 @@
 // import 'bootstrap/dist/js/bootstrap.min.js';
 
 let list = document.querySelector('.cardListArea');
-let data=[];
+let data;
 let str="";
+//console.log(data);
+let searchBar = document.querySelector('.seacherNum');
+let searchTxt='';
 
 function init(){
   axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
@@ -12,7 +15,7 @@ function init(){
       //console.log(data);
       renderC3();
       render();
-      
+      renderSearchNum();
       //console.log(response.data);
     })
     .catch(function(err){
@@ -20,6 +23,44 @@ function init(){
     })
 }
 
+function renderC3(){
+  let areaObj = {};
+  //console.log(data);
+  let newAreadata = data.data;//取 data裡面的 data值
+  //console.log(newAreadata);
+  newAreadata.forEach(function(item,index){
+    if(areaObj[item.area]==undefined){
+      areaObj[item.area] = 1;
+    }else{
+      areaObj[item.area] +=1;
+    }
+  })
+  //console.log(areaObj); areaObj是物件，需要轉換成陣列
+
+  //轉換資料型態
+    let newData = [];
+    let area = Object.keys(areaObj); //取area的名稱
+  //console.log(area);
+    area.forEach(function(item){
+      let ary =[];
+      ary.push(item);
+      ary.push(areaObj[item]);
+      //console.log(areaObj);
+    newData.push(ary);
+  });
+
+  //生成圓餅圖
+  let chart = c3.generate({
+    bindto: "#chart",
+    data: {
+      columns: newData,
+      type : 'donut',
+    },
+    donut: {
+      title: "套票地區比重"
+    }
+  });
+}
 
   function render(){
       //console.log(data.data);
@@ -69,51 +110,54 @@ function init(){
       //console.log('hello world');
   };
 
-  function renderC3(){
-    let areaObj = {};
-    //console.log(data);
-    let newAreadata = data.data;//取 data裡面的 data值
-    //console.log(newAreadata);
-    newAreadata.forEach(function(item,index){
-      if(areaObj[item.area]==undefined){
-        areaObj[item.area] = 1;
-      }else{
-        areaObj[item.area] +=1;
-      }
-    })
-    //console.log(areaObj); areaObj是物件，需要轉換成陣列
-
-    //轉換資料型態
-    let newData = [];
-    let area = Object.keys(areaObj); //取area的名稱
-    //console.log(area);
-    area.forEach(function(item){
-      let ary =[];
-      ary.push(item);
-      ary.push(areaObj[item]);
-      //console.log(areaObj);
-      newData.push(ary);
-    });
-
-    //生成圓餅圖
-    let chart = c3.generate({
-      bindto: "#chart",
-      data: {
-        columns: newData,
-        type : 'donut',
-      },
-      donut: {
-        title: "套票地區比重"
-      }
-    });
-  }
+function renderSearchNum(){
+  let search = data.data;
+  console.log(search);
+  console.log(search.name);
+  // search.forEach(function(item){
+    
+  //   //console.log(item);
+  // })
+  searchTxt+=`本次搜尋共${search.length}筆資料`
+  searchBar.innerHTML+=searchTxt;
+}
 
   init();
 
 
+  const btnAdd = document.querySelector('.btnAdd');
 
+  btnAdd.addEventListener('click',function(e){
+    const nameText =document.querySelector('.inputName').value;
+    let inputImgUrl =document.querySelector('.inputImgUrl').value;
+    let inputLocation =document.querySelector('.inputLocation').value;
+    let priceForSet =document.querySelector('.priceForSet').value;
+    let numberForSet =document.querySelector('.numberForSet').value;
+    let startForSet =document.querySelector('.startForSet').value;
+    let descriptForSet =document.querySelector('.descriptForSet').value;
+    
+    let data = Object.keys(data);
+    //console.log(data);
+    
+    let obj = {
+      id: 0,
+      name: nameText,
+      imgUrl:inputImgUrl,
+      area: inputLocation,
+      description: descriptForSet,
+      group: numberForSet,
+      price: priceForSet,
+      rate: startForSet
+    };
+    //console.log();
+    console.log(ary);
+    ary.push(obj);
+    
+    renderC3();
 
-//console.log(data);
+  });
+
+  data=[[],[],[]]
 
 // let data = [
 //     {
