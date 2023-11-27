@@ -1,34 +1,52 @@
 // import 'stylesheets/all.scss';
 // import 'bootstrap/dist/js/bootstrap.min.js';
 
-let list = document.querySelector('.cardListArea');
-let data;
-let str="";
-//console.log(data);
-let searchBar = document.querySelector('.seacherNum');
-let searchTxt='';
+let data= [] ;//先將data 用成陣列
 
-function init(){
-  axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
-    .then(function (response) {
-      data=response.data;
-      //console.log(data);
-      renderC3();
-      render();
-      renderSearchNum();
-      //console.log(response.data);
-    })
-    .catch(function(err){
-      console.log(err);
-    })
-}
+let list = document.querySelector('.cardListArea');
+let searchBar = document.querySelector('.seacherNum');
+
+const nameText =document.querySelector('.inputName');
+const inputImgUrl =document.querySelector('.inputImgUrl');
+const inputLocation =document.querySelector('.inputLocation');
+const priceForSet =document.querySelector('.priceForSet');
+const numberForSet =document.querySelector('.numberForSet');
+const startForSet =document.querySelector('.startForSet');
+const descriptForSet =document.querySelector('.descriptForSet');
+
+
+const btnAdd = document.querySelector('.btnAdd'); 
+btnAdd.addEventListener('click',function(e){   
+    
+  let obj ={};
+    obj.id=data.length;
+    obj.name=nameText.value;
+    obj.imgUrl=inputImgUrl.value;
+    obj.area=inputLocation.value;
+    obj.description=descriptForSet.value;
+    obj.group=Number(numberForSet.value);
+    obj.price=Number(priceForSet.value);
+    obj.rate= Number(startForSet.value);//轉換成數字型態
+    //console.log(data);//這邊為什麼是物件型態，但我在一開始明明設定為 Data
+    //console.log(obj);
+    data.push(obj); //推不進去
+    console.log(data);
+    //console.log(obj);
+
+    //console.log(data);
+    // data.push(obj);
+    renderC3(data);
+    render(data);
+  } 
+);
+
 
 function renderC3(){
   let areaObj = {};
   //console.log(data);
-  let newAreadata = data.data;//取 data裡面的 data值
+  //let newAreadata = data.data;//取 data裡面的 data值
   //console.log(newAreadata);
-  newAreadata.forEach(function(item,index){
+  data.forEach(function(item,index){
     if(areaObj[item.area]==undefined){
       areaObj[item.area] = 1;
     }else{
@@ -62,14 +80,16 @@ function renderC3(){
   });
 }
 
-  function render(){
-      //console.log(data.data);
-      let obj = data.data;
-      //console.log(obj);
-      obj.forEach(function(item){
+function render(data){
+      let str="";
+      let searchNum=0;
+      console.log(data)
+      data.forEach(function(item){
         //console.log(item);
+          //searchNum利用 forEach 特性，每跑一次就要新增一次～每次重跑就重新 render一次畫面
+          searchNum++;
           str+=`
-            <li class="tickCard col-4" >
+            <li class="tickCard col-4 mb-4" >
                   <div class="card h-100">
                     <div class="position-relative">
                       <div class="bg-softblue text-light fs-5 position-absolute rounded-end px-3 py-2 areaTag">${item.area}</div>
@@ -107,57 +127,41 @@ function renderC3(){
       }
     )
       list.innerHTML=str;
-      //console.log('hello world');
-  };
+      searchBar.innerHTML =`本次搜尋共 ${searchNum} 筆資料`
+};
 
-function renderSearchNum(){
-  let search = data.data;
-  console.log(search);
-  console.log(search.name);
-  // search.forEach(function(item){
-    
-  //   //console.log(item);
-  // })
-  searchTxt+=`本次搜尋共${search.length}筆資料`
-  searchBar.innerHTML+=searchTxt;
-}
+// function renderSearchNum(){
+//   let search = data.data;
+//   searchTxt+=`本次搜尋共${search.length}筆資料`
+//   searchBar.innerHTML+=searchTxt;
+//   console.log(search);
+//   //console.log(data);
+//   //console.log(search.length,`送出後資料`);
+  
+// }
+
+
+
+  
+  function init(){
+    axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
+      .then(function (response) {
+        //console.log(response);
+        data=response.data.data;//這編寫成 data.data
+        console.log(data)
+
+        renderC3();
+        render();
+      })
+      .catch(function(err){
+        console.log(err);
+      })
+  }
 
   init();
 
 
-  const btnAdd = document.querySelector('.btnAdd');
-
-  btnAdd.addEventListener('click',function(e){
-    const nameText =document.querySelector('.inputName').value;
-    let inputImgUrl =document.querySelector('.inputImgUrl').value;
-    let inputLocation =document.querySelector('.inputLocation').value;
-    let priceForSet =document.querySelector('.priceForSet').value;
-    let numberForSet =document.querySelector('.numberForSet').value;
-    let startForSet =document.querySelector('.startForSet').value;
-    let descriptForSet =document.querySelector('.descriptForSet').value;
-    
-    let data = Object.keys(data);
-    //console.log(data);
-    
-    let obj = {
-      id: 0,
-      name: nameText,
-      imgUrl:inputImgUrl,
-      area: inputLocation,
-      description: descriptForSet,
-      group: numberForSet,
-      price: priceForSet,
-      rate: startForSet
-    };
-    //console.log();
-    console.log(ary);
-    ary.push(obj);
-    
-    renderC3();
-
-  });
-
-  data=[[],[],[]]
+  //data=[[],[],[]]
 
 // let data = [
 //     {
@@ -233,3 +237,69 @@ function renderSearchNum(){
 //    list.innerHTML=str;
 //    console.log('hello world');
 
+
+// 
+    // inputImgUrl.value == "";
+    // inputLocation.value == "";
+    // priceForSet.value == "";
+    // numberForSet.value == "";
+    // startForSet.value == "";
+    // descriptForSet.value == "";
+    
+    //參考同學 -- 可能不能使用這種寫法
+    /*
+    let obj = {
+        id: 0,
+        name: nameText,
+        imgUrl: `{inputImgUrl}`,
+        area: inputLocation,
+        description: descriptForSet,
+        group: numberForSet,
+        price: priceForSet,
+        rate: startForSet
+      };
+
+      //let newData = [];
+      //data = {[{},{},{}]}
+      let newData = data.data;
+
+      newData.push(obj);
+      //console.log(newData);
+
+      renderC3();
+      render();
+      renderSearchNum(); 
+       */
+
+
+      //欄位空白判斷
+      // if(nameText.value == ""){
+      //   alert('請填寫套票名稱');
+      //   return;
+      // }else{
+      //   nameText.value == "";
+      // }
+      // if(inputImgUrl.value == ""){
+      //   alert('請輸入圖片連結');
+      //   return;
+      // }
+      // if(inputLocation.value == ""){
+      //   alert('請選擇地區');
+      //   return;
+      // }
+      // if(priceForSet.value == ""){
+      //   alert('請輸入金額');
+      //   return;
+      // }
+      // if(numberForSet.value == ""){
+      //   alert('請輸入套票組數');
+      //   return;
+      // }
+      // if(startForSet.value == ""){
+      //   alert('請輸入星星數');
+      //   return;
+      // }
+      // if(descriptForSet.value == "" && descriptForSet.length <= 20){
+      //   alert('請輸入描述');
+      //   return;
+      // }
