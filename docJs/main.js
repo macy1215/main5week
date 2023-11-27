@@ -32,7 +32,13 @@ btnAdd.addEventListener('click',function(e){
     data.push(obj); //推不進去
     console.log(data);
     //console.log(obj);
-
+    nameText.value='';
+    inputImgUrl.value='';
+    inputLocation.value='';
+    priceForSet.value='';
+    numberForSet.value='';
+    startForSet.value='';
+    descriptForSet.value='';
     //console.log(data);
     // data.push(obj);
     renderC3(data);
@@ -44,7 +50,7 @@ btnAdd.addEventListener('click',function(e){
 function renderC3(){
   let areaObj = {};
   //console.log(data);
-  //let newAreadata = data.data;//取 data裡面的 data值
+  //let newAreadata = data.data;//取 data裡面的 data值  因為在init的data
   //console.log(newAreadata);
   data.forEach(function(item,index){
     if(areaObj[item.area]==undefined){
@@ -140,9 +146,42 @@ function render(data){
   
 // }
 
+//-------地區搜尋篩選 ---參考學習同學的
+const regionSearch = document.querySelector('.regionSearch');
+regionSearch.addEventListener('change',function(e){
+  //因為是切換所以要使用 'change'
+  let newData = [];
+  //console.log(e.target.value); 看顯示的 value
+  if(e.target.value == ''){
+    newData=data;//全部
+  }else if(e.target.value === '台北'){
+    data.forEach(function(item){
+      if(item.area === '台北'){
+        newData.push(item);
+        //console.log(newData);
+      }
+    });
+  }else if(e.target.value === '台中'){
+    data.forEach(function(item){
+      if(item.area === '台中'){
+        newData.push(item);
+        //console.log(newData);
+      }
+    });
+  }else if(e.target.value === '高雄'){
+    data.forEach(function(item){
+      if(item.area === '高雄'){
+        newData.push(item);
+        //console.log(newData);
+      }
+    });
+  }
+  render(newData);
+  renderC3(newData);
+});
 
 
-  
+//-------畫面初始化--重置
   function init(){
     axios.get('https://raw.githubusercontent.com/hexschool/js-training/main/travelApi.json')
       .then(function (response) {
@@ -150,8 +189,8 @@ function render(data){
         data=response.data.data;//這編寫成 data.data
         console.log(data)
 
-        renderC3();
-        render();
+        renderC3(data);//要寫出要render的 data
+        render(data);
       })
       .catch(function(err){
         console.log(err);
